@@ -1,0 +1,147 @@
+
+<div class="col-sm-12 col-md-3 col-lg-3" id="sidebar">
+    <!--Para poder obtener la descripcion general del blog se necesita crear el widget de Header ya que de lo contrario
+    al utilzar la etiqueta data:description no la reconoce entonces una de las ideas que se me ocurre en este momento es que
+    se cree la estructura de la plantilla y luego se coloque ese widget dentro del div que lo contendria-->
+    
+    <b:section class='header-section' id='header-section' maxwidgets='1' showaddelement='no'>
+        <b:widget locked='true' title='TEMPLATE (Header)' id='Header1' type='Header' version='1' visible='true'>
+            <b:includable id='main'>
+                <b:include name='title'/>
+                <b:include name='description'/>
+
+                
+
+            </b:includable>
+            <b:includable id='description'>
+                <p><data:description/></p>
+            </b:includable>
+
+            <b:includable id='title'>
+                <a class='logo' expr:href='data:blog.homepagerUrl'><data:title/></a>
+            </b:includable>
+        </b:widget>
+    
+    </b:section>
+    <!--Boton para mostrar el menu, cuando se ve en dispositivos moviles-->
+    <button class='navbar-toggle' data-target='.navbar-collapse' data-toggle='collapse' type='button'>
+        <span class='sr-only'>
+        Toggle navigation
+        </span>
+        <span class='icon-bar'/>
+        <span class='icon-bar'/>
+        <span class='icon-bar'/>
+    </button>
+
+    <!--Seccion de las redes sociales-->
+    <div class='sosial'>
+        <a class='fa fa-2x fa-facebook' href='#'>
+        <span class='sr-only'>
+            facebook
+        </span>
+        </a>
+        <a class='fa fa-2x fa-twitter' href='#'>
+        <span class='sr-only'>
+            twitter
+        </span>
+        </a>
+        <a class='fa fa-2x fa-github' href='#'>
+        <span class='sr-only'>
+            github
+        </span>
+        </a>
+        <a class='fa fa-2x fa-google-plus' href='#'>
+        <span class='sr-only'>
+            google plus
+        </span>
+        </a>
+    </div>
+
+    <!--
+        Esta seccion es la que se muestra al presionar el boton de menu, cuando se esta viendo desde dispositivos moviles
+    -->
+    <div class='collapse navbar-collapse'>
+    <div class='menu-testing-menu-container' id='primary-menu'>
+        <b:section class='top-menutop' id='top-menutop' maxwidgets='1' showaddelement='no'>
+        <b:widget id='PageList8' locked='false' title='Pages - Menu' type='PageList' version='1' visible='true'>
+            <b:includable id='main'>
+            <b:if cond='data:title'>
+                <!--<h2><data:title/></h2>-->
+            </b:if>
+            <div class='widget-content'>
+                <ul class='menu'>
+                <b:loop values='data:links' var='link'>
+                    <b:if cond='data:link.isCurrentPage'>
+                        <li id='currentpage'>
+                            <a expr:href='data:link.href'>
+                                <data:link.title/>
+                            </a>
+                        </li>
+                    <b:else/>
+                        <li>
+                            <a expr:href='data:link.href'>
+                                <data:link.title/>
+                            </a>
+                        </li>
+                    </b:if>
+                </b:loop>
+                </ul>
+                <b:include name='quickedit'/>
+            </div>
+            </b:includable>
+        </b:widget>
+        </b:section>
+    </div>
+    </div>
+
+    <!--Esta seccion contiene la atribucion forma parte de la parte izquierda en el template original
+    de donde adquiri el codigo -->
+
+    <b:section class='sidebar-left' id='sidebar-left' preferred='yes'>
+        <b:widget id='Attribution1' locked='true' title='' type='Attribution' visible='true'>
+            <b:includable id='main'>
+                <b:if cond='data:feedbackSurveyLink'>
+                    <div class='mobile-survey-link' style='text-align: center;'>
+                        <data:feedbackSurveyLink/>
+                    </div>
+                </b:if>
+
+                <div class='widget-content' style='text-align: center;'>
+                    <b:if cond='data:attribution != &quot;&quot;'>
+                        <data:attribution/>
+                    </b:if>
+                </div>
+
+                <b:include name='quickedit'/><!--Tengo que averiguar para que sirce esto ya que hasta el momento no lo se-->
+
+            </b:includable>
+        </b:widget>
+    </b:section>
+
+
+
+</div> <!--END OF SIDEBAR-->
+
+<!--
+    En esta seccion se encuentra el boton de busqueda y el formulario
+-->
+<div id='header-holder'>
+    <header class='clearfix'>
+        <div class='col-sm-12 col-md-6 col-md-offset-3 col-lg-7 col-lg-offset-2 col-content' id='description'>
+            <h1 class='sr-only'>
+                <data:blog.pageName/>
+            </h1>
+            <p class='siteintro sr-only'/>
+        </div>
+        <div class='col-sm-12 col-md-3' id='nav-search'>
+            <div id='search-holder'>
+                <form expr:action='data:blog.homepageUrl + &quot;search/&quot;' id='search-form' method='get' role='search'>
+                    <input class='search-field' name='q' type='search' value='Search...'/>
+                </form>
+            </div>
+            <button id='search-btn'>
+                <i class='fa fa-2x fa-search'/>
+            </button>
+        </div>
+    </header>
+</div> <!--END OF HEADER-HOLDER-->
